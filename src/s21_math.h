@@ -32,4 +32,7 @@ int s21_isnan(long double number);
 int result_check(long double my_number, long double true_number);
 long double new_s21_pow(double base, double exp);
 
+long double s21_pow_int(double base, int exp);
+long double s21_atan(double x);
+
 #endif  // SRC_S21_MATH_H_

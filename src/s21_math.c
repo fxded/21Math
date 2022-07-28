@@ -304,3 +304,35 @@ int s21_fact(int i) {
     }
     return ans;
 }
+
+long double s21_pow_int(double base, int exp) {
+    long double sol = 1;
+    long double znak = 0;
+    if (exp < 0) {
+        znak = 1;
+        exp = -exp;
+    }
+    for (int i = 0; i < exp; i++) {
+        sol *= base;
+    }
+    return znak ? 1/sol : sol;
+}
+
+long double s21_atan(double x) {
+    long double sol = x;
+
+    long double slagaemoe = x;
+    if (s21_fabs(x)<= 1) {
+        for(int i = 1; i < 5000; i++) {
+            slagaemoe *= -1 * x * x;
+            sol += slagaemoe / (2 * i + 1);
+        }
+    } else {
+        sol = 0;
+        for (register int i = 0; i < 3000; i++) {
+            sol += s21_pow_int(-1, i) * s21_pow_int(x, -1 - (2 * i)) / (1 + (2 * i));
+        }
+        sol = s21_PI * s21_sqrt(x * x) / (2 * x) - sol;
+    }
+    return sol;
+}
