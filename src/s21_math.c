@@ -324,8 +324,8 @@ long double s21_atan(double x) {
         sol = s21_PI/2;
     } else {
         long double slagaemoe = x;
-        if (s21_fabs(x)<= 1) {
-            for(int i = 1; i < 5000; i++) {
+        if (s21_fabs(x) <= 1) {
+            for (int i = 1; i < 5000; i++) {
                 slagaemoe *= -1 * x * x;
                 sol += slagaemoe / (2 * i + 1);
             }

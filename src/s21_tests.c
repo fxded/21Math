@@ -450,9 +450,6 @@ Suite *s21_string_suite(void) {
     tcase_add_test(tcase_core, fmod_test_1);
     tcase_add_test(tcase_core, fmod_test_2);
     tcase_add_test(tcase_core, asin_acos_atan_test);
-
-    
-
     suite_add_tcase(suite, tcase_core);
 
     return suite;
