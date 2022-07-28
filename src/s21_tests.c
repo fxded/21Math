@@ -246,12 +246,54 @@ START_TEST(acos_test_2) {
 }
 END_TEST
 
+START_TEST(atan_test_1) {
+    for (float k = -10; k <= 10; k += 4) {
+        double a = s21_atan(k);
+        double b = atan(k);
+        ck_assert_double_eq_tol(a, b, 1e-7);
+    }
+}
+END_TEST
+
+START_TEST(atan_test_2) {
+    double a = 12;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+    a = 0.4;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+    a = -0.333;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+    a = 55;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+    a = 13.54;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+    a = s21_EXP;
+    ck_assert_double_eq_tol(atan(a), s21_atan(a), 1e-7);
+}
+END_TEST
+
 START_TEST(sqrt_test_1) {
     for (double k = 0; k < 21; k += 3) {
         double a = s21_sqrt(k);
         double b = sqrt(k);
         ck_assert_double_eq_tol(a, b, 1e-6);
     }
+}
+END_TEST
+
+START_TEST(asin_acos_atan_test) {
+    ck_assert_double_nan(s21_asin(s21_NAN));
+    ck_assert_double_nan(s21_acos(s21_NAN));
+    ck_assert_double_nan(s21_atan(s21_NAN));
+    ck_assert_double_nan(s21_asin(s21_INF));
+    ck_assert_double_nan(s21_acos(s21_INF));
+    ck_assert_double_eq(atan(s21_INF), s21_atan(s21_INF));
+    ck_assert_double_nan(s21_asin(-s21_INF));
+    ck_assert_double_nan(s21_acos(-s21_INF));
+    ck_assert_double_eq(atan(-INFINITY), atan(-s21_INF));
+    ck_assert_double_nan(s21_asin(5));
+    ck_assert_double_nan(s21_acos(6));
+    ck_assert_double_nan(s21_asin(-8));
+    ck_assert_double_nan(s21_acos(-4));
 }
 END_TEST
 
@@ -396,6 +438,8 @@ Suite *s21_string_suite(void) {
     tcase_add_test(tcase_core, asin_test_2);
     tcase_add_test(tcase_core, acos_test_1);
     tcase_add_test(tcase_core, acos_test_2);
+    tcase_add_test(tcase_core, atan_test_1);
+    tcase_add_test(tcase_core, atan_test_2);
     tcase_add_test(tcase_core, asin_acos_test);
     tcase_add_test(tcase_core, sqrt_test_1);
     tcase_add_test(tcase_core, sqrt_test_2);
@@ -405,6 +449,9 @@ Suite *s21_string_suite(void) {
     tcase_add_test(tcase_core, ceil_test);
     tcase_add_test(tcase_core, fmod_test_1);
     tcase_add_test(tcase_core, fmod_test_2);
+    tcase_add_test(tcase_core, asin_acos_atan_test);
+
+    
 
     suite_add_tcase(suite, tcase_core);
 
